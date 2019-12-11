@@ -39,61 +39,68 @@ PyTorch deep learning project made easy.
 * tensorboard >= 1.14 (see [Tensorboard Visualization][#tensorboardx-visualization])
 
 ## Features
-* Clear folder structure which is suitable for many deep learning projects.
+* Clear folder structure which is suitable for many deep learning projects. 
+* 清晰的文件夹结构，适用于许多深度学习项目
 * `.json` config file support for convenient parameter tuning.
+* `.json`配置文件支持方便地进行参数调整。
 * Customizable command line options for more convenient parameter tuning.
+* 可自定义的命令行选项，可更方便地进行参数调整。（argparse）
 * Checkpoint saving and resuming.
+* checkpoint保存和恢复。
 * Abstract base classes for faster development:
   * `BaseTrainer` handles checkpoint saving/resuming, training process logging, and more.
+  * `BaseTrainer`处理checkpoint保存/恢复，训练过程记录，等
   * `BaseDataLoader` handles batch generation, data shuffling, and validation data splitting.
+  * `BaseDataLoader` 处理batch生成，data shuffling，validation data splitting
   * `BaseModel` provides basic model summary.
+  * `BaseModel` 提供了基本模型
 
 ## Folder Structure
   ```
   pytorch-template/
   │
-  ├── train.py - main script to start training
-  ├── test.py - evaluation of trained model
+  ├── train.py - main script to start training 训练
+  ├── test.py - evaluation of trained model 评估
   │
-  ├── config.json - holds configuration for training
-  ├── parse_config.py - class to handle config file and cli options
+  ├── config.json - holds configuration for training 训练的配置
+  ├── parse_config.py - class to handle config file and cli options 处理配置文件和cli选项的类
   │
-  ├── new_project.py - initialize new project with template files
+  ├── new_project.py - initialize new project with template files 使用模板初始化新项目
   │
-  ├── base/ - abstract base classes
+  ├── base/ - abstract base classes 
   │   ├── base_data_loader.py
   │   ├── base_model.py
   │   └── base_trainer.py
   │
-  ├── data_loader/ - anything about data loading goes here
+  ├── data_loader/ - anything about data loading goes here 数据加载
   │   └── data_loaders.py
   │
-  ├── data/ - default directory for storing input data
+  ├── data/ - default directory for storing input data 存输入数据
   │
-  ├── model/ - models, losses, and metrics
+  ├── model/ - models, losses, and metrics 模型，评估和loss
   │   ├── model.py
   │   ├── metric.py
   │   └── loss.py
   │
-  ├── saved/
+  ├── saved/ 存模型和记录
   │   ├── models/ - trained models are saved here
   │   └── log/ - default logdir for tensorboard and logging output
   │
   ├── trainer/ - trainers
   │   └── trainer.py
   │
-  ├── logger/ - module for tensorboard visualization and logging
+  ├── logger/ - module for tensorboard visualization and logging  tensorboard可视化和记录
   │   ├── visualization.py
   │   ├── logger.py
   │   └── logger_config.json
   │  
-  └── utils/ - small utility functions
+  └── utils/ - small utility functions 工具
       ├── util.py
       └── ...
   ```
 
 ## Usage
-The code in this repo is an MNIST example of the template.
+The code in this repo（仓库）is an MNIST example of the template.
 Try `python train.py -c config.json` to run code.
 
 ### Config file format
