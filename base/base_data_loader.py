@@ -24,7 +24,7 @@ class BaseDataLoader(DataLoader):
             'collate_fn': collate_fn,
             'num_workers': num_workers
         }
-        super().__init__(sampler=self.sampler, **self.init_kwargs)
+        # super().__init__(sampler=self.sampler, **self.init_kwargs)
 
     def _split_sampler(self, split):
         if split == 0.0:
@@ -43,10 +43,10 @@ class BaseDataLoader(DataLoader):
             len_valid = int(self.n_samples * split)
 
         valid_idx = idx_full[0:len_valid]
-        train_idx = np.delete(idx_full, np.arange(0, len_valid))
+        train_idx = np.delete(idx_full, np.arange(0, len_valid))    # 从idx_full中删除索引在[0, len_valid)中的树
 
-        train_sampler = SubsetRandomSampler(train_idx)
-        valid_sampler = SubsetRandomSampler(valid_idx)
+        train_sampler = SubsetRandomSampler(train_idx)  # Samples elements randomly from a given list of indices, without replacement.
+        valid_sampler = SubsetRandomSampler(valid_idx)  # 从给定的索引列表中随机抽取样本元素，无需替换。至此已经shuffle了两遍
 
         # turn off shuffle option which is mutually exclusive with sampler
         self.shuffle = False

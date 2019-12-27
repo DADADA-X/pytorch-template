@@ -18,7 +18,7 @@ def read_json(fname):
 def write_json(content, fname):
     fname = Path(fname)
     with fname.open('wt') as handle:
-        json.dump(content, handle, indent=4, sort_keys=False)
+        json.dump(content, handle, indent=4, sort_keys=False)   # indent 缩进；sort_keys: 按key排序
 
 def inf_loop(data_loader):
     ''' wrapper function for endless data loader. '''

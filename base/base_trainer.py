@@ -13,30 +13,31 @@ class BaseTrainer:
         self.logger = config.get_logger('trainer', config['trainer']['verbosity'])
 
         # setup GPU device if available, move model into configured device
-        self.device, device_ids = self._prepare_device(config['n_gpu'])
-        self.model = model.to(self.device)
+        self.device, device_ids = self._prepare_device(config['n_gpu'])    # device_ids是用在DataParallel的
+        self.model = model.to(self.device)  # 模型to device
         if len(device_ids) > 1:
             self.model = torch.nn.DataParallel(model, device_ids=device_ids)
 
         self.criterion = criterion
-        self.metric_ftns = metric_ftns
+        self.metric_ftns = metric_ftns  # 评价方法
         self.optimizer = optimizer
 
         cfg_trainer = config['trainer']
         self.epochs = cfg_trainer['epochs']
-        self.save_period = cfg_trainer['save_period']
-        self.monitor = cfg_trainer.get('monitor', 'off')
+        self.save_period = cfg_trainer['save_period']   # 每多少epoch存一次
+        self.monitor = cfg_trainer.get('monitor', 'off')    # 这是dict的方法，返回cfg_trainer中的monitor，如果不存在，返回默认值'off'，可能跟后面的配置有关
 
         # configuration to monitor model performance and save best
+        # monitor用来记录各种指标变化情况
         if self.monitor == 'off':
             self.mnt_mode = 'off'
             self.mnt_best = 0
         else:
             self.mnt_mode, self.mnt_metric = self.monitor.split()
-            assert self.mnt_mode in ['min', 'max']
+            assert self.mnt_mode in ['min', 'max']  # 断言是：应该...，断言失败抛出assertionerror，断言成功继续运行
 
             self.mnt_best = inf if self.mnt_mode == 'min' else -inf
-            self.early_stop = cfg_trainer.get('early_stop', inf)
+            self.early_stop = cfg_trainer.get('early_stop', inf)    # 早停
 
         self.start_epoch = 1
 

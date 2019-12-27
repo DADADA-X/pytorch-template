@@ -1,7 +1,7 @@
 import importlib
 from datetime import datetime
 
-
+# Tensorboard可视化工具，它通过将程序输出的日志文件的信息可视化使得程序的理解、调试和优化更加简单高效。
 class TensorboardWriter():
     def __init__(self, log_dir, logger, enabled):
         self.writer = None

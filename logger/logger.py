@@ -16,7 +16,7 @@ def setup_logging(save_dir, log_config='logger/logger_config.json', default_leve
             if 'filename' in handler:
                 handler['filename'] = str(save_dir / handler['filename'])
 
-        logging.config.dictConfig(config)
+        logging.config.dictConfig(config)   # 从字典中获取logging的配置，这个config是读进来的OrderedDict
     else:
         print("Warning: logging configuration file is not found in {}.".format(log_config))
         logging.basicConfig(level=default_level)
