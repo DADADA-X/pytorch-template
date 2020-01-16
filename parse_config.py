@@ -66,7 +66,7 @@ class ConfigParser:
         if args.resume is not None:
             resume = Path(args.resume)
             cfg_fname = resume.parent / 'config.json'
-        else:   # 如果右resume的checkpoint的话，就用当时的config文件，如果没有，就用args里面的config文件
+        else:   # 如果有resume的checkpoint的话，就用当时的config文件，如果没有，就用args里面的config文件
             msg_no_cfg = "Configuration file need to be specified. Add '-c config.json', for example."
             assert args.config is not None, msg_no_cfg
             resume = None

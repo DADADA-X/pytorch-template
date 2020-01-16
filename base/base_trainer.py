@@ -50,7 +50,7 @@ class BaseTrainer:
             self._resume_checkpoint(config.resume)
 
     @abstractmethod
-    def _train_epoch(self, epoch):
+    def _train_epoch(self, epoch):  # 含抽象方法的类不能实例化，继承了这个方法的子类必须复写此方法，未被修饰的不重写
         """
         Training logic for an epoch
 
@@ -72,7 +72,7 @@ class BaseTrainer:
 
             # print logged informations to the screen
             for key, value in log.items():
-                self.logger.info('    {:15s}: {}'.format(str(key), value))
+                self.logger.info('    {:15s}: {}'.format(str(key), value))  # 在info信息的粒度上描述了运行过程
 
             # evaluate model performance according to configured metric, save best checkpoint as model_best
             best = False

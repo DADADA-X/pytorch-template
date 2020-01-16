@@ -22,10 +22,12 @@ def write_json(content, fname):
 
 def inf_loop(data_loader):
     ''' wrapper function for endless data loader. '''
+    '''无限循环的data_loader'''
     for loader in repeat(data_loader):
         yield from loader
 
 class MetricTracker:
+    '''metric的跟踪器，把loss和metric function的所有东西，按照total counts average 用tensorboard画下来'''
     def __init__(self, *keys, writer=None):
         self.writer = writer
         self._data = pd.DataFrame(index=keys, columns=['total', 'counts', 'average'])
